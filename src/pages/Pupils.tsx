@@ -262,7 +262,18 @@ const Pupils = () => {
                 </CardDescription>
               </CardHeader>
               <CardContent className="p-12">
-                <AddPupilForm onSuccess={() => toast({ title: "Success", description: "Pupil added successfully." })} />
+                <Tabs defaultValue="Primary" className="space-y-8">
+                  <TabsList className="bg-muted/30 p-1 rounded-xl border border-border/10">
+                    <TabsTrigger value="Primary" className="px-8 py-2 text-[10px] font-black uppercase tracking-widest transition-all">Primary Section</TabsTrigger>
+                    <TabsTrigger value="Nursery" className="px-8 py-2 text-[10px] font-black uppercase tracking-widest transition-all">Nursery Section</TabsTrigger>
+                  </TabsList>
+                  <TabsContent value="Primary" className="animate-in slide-in-from-left-2 duration-300">
+                    <AddPupilForm defaultSection="Primary" onSuccess={() => toast({ title: "Success", description: "Primary pupil added successfully." })} />
+                  </TabsContent>
+                  <TabsContent value="Nursery" className="animate-in slide-in-from-left-2 duration-300">
+                    <AddPupilForm defaultSection="Nursery" onSuccess={() => toast({ title: "Success", description: "Nursery pupil added successfully." })} />
+                  </TabsContent>
+                </Tabs>
               </CardContent>
             </Card>
           </TabsContent>

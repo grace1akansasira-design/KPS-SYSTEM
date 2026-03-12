@@ -116,6 +116,10 @@
   body {
     @apply bg-background text-foreground antialiased;
     font-family: 'Outfit', system-ui, sans-serif;
+    overflow-x: hidden;
+    overflow-y: auto;
+    width: 100%;
+    position: relative;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -291,15 +295,15 @@
      DASHBOARD CONTENT
      ================================ */
   .dashboard-content {
-    @apply flex-1 p-4 md:p-6;
+    @apply flex-1 p-4 md:p-6 w-full max-w-full overflow-y-auto overflow-x-hidden;
   }
 
   .dashboard-header {
-    @apply mb-6;
+    @apply mb-6 px-4 md:px-0;
   }
 
   .content-fade-in {
-    @apply animate-fade-in;
+    @apply animate-fade-in w-full max-w-full overflow-x-hidden;
   }
 }
 

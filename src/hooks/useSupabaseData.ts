@@ -717,7 +717,7 @@ export function useDashboardStats() {
         totalTeachers: 32,
         totalSubjects: subjects.count ?? 0,
         totalRooms: 25,
-        totalPupils: 4450,
+        totalPupils: 450,
         totalTimeSlots: timeSlots.count ?? 0,
       };
     },

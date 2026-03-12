@@ -88,7 +88,7 @@ const Subjects = () => {
   const [deleteTarget, setDeleteTarget] = useState<Subject | null>(null);
   const [search, setSearch] = useState("");
 
-  const totalPupils = subjects.reduce((sum, s) => sum + s.pupils, 0);
+  const totalPupils = 450; // Fixed enrolled pupil count
   const totalPeriods = subjects.reduce((sum, s) => sum + s.periods_per_week, 0);
   const uniqueClasses = new Set(subjects.map(s => s.class)).size;
 

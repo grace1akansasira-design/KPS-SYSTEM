@@ -715,7 +715,7 @@ export function useDashboardStats() {
       // Hardcoded overrides as requested by the user
       return {
         totalTeachers: 32,
-        totalSubjects: subjects.count ?? 0,
+        totalSubjects: 12,
         totalRooms: 25,
         totalPupils: 450,
         totalTimeSlots: timeSlots.count ?? 0,

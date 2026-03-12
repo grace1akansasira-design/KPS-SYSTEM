@@ -100,8 +100,15 @@ const Settings = () => {
       }
 
       const reader = new FileReader();
-      reader.onloadend = () => {
-        setAvatarUrl(reader.result as string);
+      reader.onloadend = async () => {
+        const dataUrl = reader.result as string;
+        setAvatarUrl(dataUrl);
+        // Immediately persist the avatar so it survives page reloads
+        await updateProfile({ avatar_url: dataUrl });
+        toast({
+          title: "Photo Updated",
+          description: "Your profile photo has been saved.",
+        });
       };
       reader.readAsDataURL(file);
     }

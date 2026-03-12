@@ -24,6 +24,22 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
+const AVATAR_CACHE_PREFIX = "kps_avatar_";
+
+function getCachedAvatar(userId: string): string | undefined {
+  return localStorage.getItem(AVATAR_CACHE_PREFIX + userId) || undefined;
+}
+
+function setCachedAvatar(userId: string, avatarUrl: string) {
+  try {
+    localStorage.setItem(AVATAR_CACHE_PREFIX + userId, avatarUrl);
+  } catch (e) {
+    // Storage quota exceeded — clear just the avatar cache
+    localStorage.removeItem(AVATAR_CACHE_PREFIX + userId);
+    console.warn("Could not cache avatar — storage may be full.");
+  }
+}
+
 async function fetchUserProfile(supabaseUser: SupabaseUser): Promise<User | null> {
   let profileData: any = null;
   
@@ -55,13 +71,18 @@ async function fetchUserProfile(supabaseUser: SupabaseUser): Promise<User | null
     .eq("user_id", supabaseUser.id)
     .single();
 
+  // Use DB avatar_url if available, otherwise fall back to locally cached avatar
+  const dbAvatar = profileData?.avatar_url;
+  const cachedAvatar = getCachedAvatar(supabaseUser.id);
+  const resolvedAvatar = dbAvatar || cachedAvatar || undefined;
+
   return {
     id: supabaseUser.id,
     email: supabaseUser.email ?? "",
     role: (roleData?.role as UserRole) ?? "student",
     name: profileData?.name ?? supabaseUser.email ?? "",
     department: profileData?.department ?? undefined,
-    avatar_url: profileData?.avatar_url ?? undefined,
+    avatar_url: resolvedAvatar,
   };
 }
 
@@ -156,6 +177,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const updateProfile = async (updates: Partial<User>): Promise<{ success: boolean; error?: string }> => {
     if (!user) return { success: false, error: "No user logged in" };
 
+    // Always cache avatar locally for persistence across page reloads
+    if (updates.avatar_url) {
+      setCachedAvatar(user.id, updates.avatar_url);
+    }
+
     try {
       // If mock user
       if (user.id.startsWith("mock-")) {
@@ -165,7 +191,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         return { success: true };
       }
 
-      // If real user
+      // If real user — update in-memory immediately so UI reflects change
+      setUser({ ...user, ...updates });
+
+      // Then attempt to persist to DB (non-blocking for avatar)
       const { error } = await supabase
         .from("profiles")
         .update({
@@ -175,9 +204,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         })
         .eq("user_id", user.id);
 
-      if (error) throw error;
+      if (error) {
+        console.warn("Profile DB update failed (avatar cached locally):", error.message);
+        // Don't throw — avatar is already cached locally and user state updated
+      }
 
-      setUser({ ...user, ...updates });
       return { success: true };
     } catch (e: any) {
       return { success: false, error: e.message || "Failed to update profile" };

@@ -1,73 +1,68 @@
-# Welcome to your Lovable project
+# KPS | Timetable Management System
 
-## Project info
+Official academic scheduling platform for **Kabale Preparatory School (KPS)**. Designed for "Excellence in Organization," this system streamlines the management of pupils, faculty, lessons, and classrooms.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+## 🚀 Features
 
-## How can I edit this code?
+- **Automated Timetable Generation**: A core orchestration engine to automatically generate collision-free schedules for the entire school.
+- **Management Console**: Comprehensive control for Administrators to manage the school's ecosystem.
+- **Faculty Management**: Registration and organization of Primary and Nursery teaching staff.
+- **Pupil Admission**: Streamlined tracking of enrolled pupils across different sections.
+- **Subject Repository**: Centralized database for academic lessons and curriculum planning.
+- **Classroom & Infrastructure**: Management of physical rooms and academic sections.
+- **Dashboard & Analytics**: Real-time stats on enrolled pupils, active lessons, and teaching staff.
+- **Notification System**: Keeping the school community updated on schedule changes.
 
-There are several ways of editing your application.
+## 🛠️ Tech Stack
 
-**Use Lovable**
+- **Frontend**: Vite, React, TypeScript
+- **Styling**: Tailwind CSS, shadcn/ui
+- **State Management**: TanStack Query (React Query)
+- **Backend/Database**: Supabase (PostgreSQL, Auth, RLS)
+- **Icons**: Lucide React
+- **Authentication**: Custom AuthProvider with role-based access control (Admin, Head Teacher, Teacher, Pupil).
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+## 📥 Getting Started
 
-Changes made via Lovable will be committed automatically to this repo.
+### Prerequisites
 
-**Use your preferred IDE**
+- Node.js & npm installed.
+- A Supabase project set up.
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Installation
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+1. **Clone the repository**:
+   ```sh
+   git clone https://github.com/grace1akansasira-design/KPS-SYSTEM.git
+   cd KPS-SYSTEM
+   ```
 
-Follow these steps:
+2. **Install dependencies**:
+   ```sh
+   npm install
+   ```
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+3. **Environment Setup**:
+   Create a `.env` file in the root directory and add your Supabase credentials:
+   ```env
+   VITE_SUPABASE_URL=your_supabase_url
+   VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+   ```
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+4. **Start the development server**:
+   ```sh
+   npm run dev
+   ```
 
-# Step 3: Install the necessary dependencies.
-npm i
+## 📜 Database Setup
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+The project includes several SQL scripts and CJS utilities in the root directory for database management and RLS policy fixes. Specifically:
+- `fix_database.sql`: Initial schema setup.
+- `master_fix_and_restore.sql`: Comprehensive fix and data restoration script.
 
-**Edit a file directly in GitHub**
+## 🌐 Deployment
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+The project is optimized for deployment via Lovable or any modern frontend hosting provider (Vercel, Netlify).
 
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+---
+© 2027 Kabale Preparatory School. All rights reserved.

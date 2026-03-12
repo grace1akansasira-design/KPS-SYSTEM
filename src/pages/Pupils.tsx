@@ -88,10 +88,42 @@ const Pupils = () => {
     <DashboardLayout title="Pupils Dashboard">
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-        <Card className="border-border/40 bg-card/60 backdrop-blur-md shadow-xl"><CardContent className="p-4 flex items-center gap-4"><div className="p-3 rounded-xl bg-primary/10 shadow-inner"><GraduationCap className="w-6 h-6 text-primary" /></div><div><p className="text-2xl font-black tracking-tight">{pupils.length}</p><p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Total Pupils</p></div></CardContent></Card>
-        <Card className="border-border/40 bg-card/60 backdrop-blur-md shadow-xl"><CardContent className="p-4 flex items-center gap-4"><div className="p-3 rounded-xl bg-success/10 shadow-inner"><CheckCircle className="w-6 h-6 text-success" /></div><div><p className="text-2xl font-black tracking-tight">{activeCount}</p><p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Active Pupils</p></div></CardContent></Card>
-        <Card className="border-border/40 bg-card/60 backdrop-blur-md shadow-xl"><CardContent className="p-4 flex items-center gap-4"><div className="p-3 rounded-xl bg-warning/10 shadow-inner"><BookOpen className="w-6 h-6 text-warning" /></div><div><p className="text-2xl font-black tracking-tight">{new Set(pupils.map(p => p.class)).size}</p><p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Classes</p></div></CardContent></Card>
-        <Card className="border-border/40 bg-card/60 backdrop-blur-md shadow-xl"><CardContent className="p-4 flex items-center gap-4"><div className="p-3 rounded-xl bg-accent/20 shadow-inner"><GraduationCap className="w-6 h-6 text-accent-foreground" /></div><div><p className="text-2xl font-black tracking-tight">P1-P7</p><p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Class Range</p></div></CardContent></Card>
+        <Card className="border-border/40 bg-card/60 backdrop-blur-md shadow-xl">
+          <CardContent className="p-4 flex items-center gap-4">
+            <div className="p-3 rounded-xl bg-primary/10 shadow-inner"><GraduationCap className="w-6 h-6 text-primary" /></div>
+            <div>
+              <p className="text-2xl font-black tracking-tight">{pupils.length}</p>
+              <p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Total Pupils</p>
+            </div>
+          </CardContent>
+        </Card>
+        <Card className="border-border/40 bg-card/60 backdrop-blur-md shadow-xl">
+          <CardContent className="p-4 flex items-center gap-4">
+            <div className="p-3 rounded-xl bg-success/10 shadow-inner"><CheckCircle className="w-6 h-6 text-success" /></div>
+            <div>
+              <p className="text-2xl font-black tracking-tight">{activeCount}</p>
+              <p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Active Pupils</p>
+            </div>
+          </CardContent>
+        </Card>
+        <Card className="border-border/40 bg-card/60 backdrop-blur-md shadow-xl">
+          <CardContent className="p-4 flex items-center gap-4">
+            <div className="p-3 rounded-xl bg-warning/10 shadow-inner"><BookOpen className="w-6 h-6 text-warning" /></div>
+            <div>
+              <p className="text-2xl font-black tracking-tight">{pupils.filter(p => p.section === 'Primary').length} | {pupils.filter(p => p.section === 'Nursery').length}</p>
+              <p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Primary | Nursery</p>
+            </div>
+          </CardContent>
+        </Card>
+        <Card className="border-border/40 bg-card/60 backdrop-blur-md shadow-xl">
+          <CardContent className="p-4 flex items-center gap-4">
+            <div className="p-3 rounded-xl bg-accent/20 shadow-inner"><GraduationCap className="w-6 h-6 text-accent-foreground" /></div>
+            <div>
+              <p className="text-2xl font-black tracking-tight">N-P7</p>
+              <p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Full Range</p>
+            </div>
+          </CardContent>
+        </Card>
       </div>
 
       <Tabs defaultValue="list" className="space-y-6">
@@ -112,77 +144,108 @@ const Pupils = () => {
             <div className="flex gap-2"><Button variant="outline" className="h-11 border-border/40"><Filter className="w-4 h-4 mr-2" />Sort & Filter</Button></div>
           </div>
 
-          <Card className="data-table border-border/40 shadow-2xl overflow-hidden rounded-[2rem] bg-card/40 backdrop-blur-md">
-            <CardHeader className="bg-muted/30 border-b border-border/10 p-6">
-              <div className="flex flex-col gap-1">
-                <CardTitle className="text-lg font-black uppercase tracking-tighter">Academic Records</CardTitle>
-                <div className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">
-                  {pupils.length} pupils
-                </div>
-              </div>
-            </CardHeader>
-            <CardContent className="p-0">
-              <Table>
-                <TableHeader>
-                  <TableRow className="bg-muted/50 border-b border-border/20">
-                    <TableHead className="px-6 py-4 font-black uppercase text-[10px] tracking-widest">Pupil</TableHead>
-                    <TableHead className="px-6 py-4 font-black uppercase text-[10px] tracking-widest">Pupil ID</TableHead>
-                    <TableHead className="px-6 py-4 font-black uppercase text-[10px] tracking-widest">Class</TableHead>
-                    <TableHead className="px-6 py-4 font-black uppercase text-[10px] tracking-widest text-center">Age</TableHead>
-                    <TableHead className="px-6 py-4 font-black uppercase text-[10px] tracking-widest">Subjects</TableHead>
-                    <TableHead className="px-6 py-4 font-black uppercase text-[10px] tracking-widest">Status</TableHead>
-                    <TableHead className="w-12"></TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {pupils.length === 0 ? (
-                    <TableRow>
-                      <TableCell colSpan={7} className="text-center py-10 bg-muted/5">
-                        <p className="font-black uppercase tracking-widest text-[10px] text-muted-foreground">No pupil records found in the system</p>
-                      </TableCell>
-                    </TableRow>
-                  ) : pupils.map((pupil) => (
-                    <TableRow key={pupil.id} className="hover:bg-primary/[0.02] transition-colors border-b border-border/10 last:border-0">
-                      <TableCell className="px-6 py-5">
-                        <div className="flex items-center gap-3">
-                          <Avatar className="h-10 w-10 border-2 border-primary/10 transition-transform hover:scale-110 shadow-lg shadow-black/5"><AvatarFallback className="bg-primary/10 text-primary font-black">{pupil.name.split(' ').map(n => n[0]).join('')}</AvatarFallback></Avatar>
-                          <div><p className="font-bold text-sm tracking-tight">{pupil.name}</p><p className="text-[10px] text-muted-foreground font-black uppercase tracking-wider">{pupil.email}</p></div>
+          <Tabs defaultValue="primary" className="space-y-6">
+            <TabsList className="bg-muted/20 p-1 rounded-xl border border-border/10">
+              <TabsTrigger value="primary" className="px-8 py-2 text-[10px] font-black uppercase tracking-widest">Primary Section</TabsTrigger>
+              <TabsTrigger value="nursery" className="px-8 py-2 text-[10px] font-black uppercase tracking-widest">Nursery Section</TabsTrigger>
+            </TabsList>
+
+            {["primary", "nursery"].map((section) => {
+              const displaySection = section === "primary" ? "Primary" : "Nursery";
+              const filteredPupils = pupils.filter(p => (p.section || 'Primary') === displaySection);
+              
+              return (
+                <TabsContent key={section} value={section} className="animate-in slide-in-from-left-2 duration-300">
+                  <Card className="data-table border-border/40 shadow-2xl overflow-hidden rounded-[2rem] bg-card/40 backdrop-blur-md">
+                    <CardHeader className="bg-muted/30 border-b border-border/10 p-6">
+                      <div className="flex flex-col gap-1">
+                        <CardTitle className="text-lg font-black uppercase tracking-tighter">{displaySection} Academic Records</CardTitle>
+                        <div className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">
+                          {filteredPupils.length} pupils
                         </div>
-                      </TableCell>
-                      <TableCell className="px-6 py-5 font-mono text-xs"><Badge variant="outline" className="border-border/30 px-3 py-1 font-mono text-[10px] tracking-tighter">{pupil.pupil_id}</Badge></TableCell>
-                      <TableCell className="px-6 py-5 font-black text-xs uppercase tracking-tighter text-primary/80">{pupil.class}</TableCell>
-                      <TableCell className="px-6 py-5 text-center"><Badge variant="secondary" className="bg-muted/50 text-[10px] font-black uppercase tracking-widest px-3">{pupil.age} yrs</Badge></TableCell>
-                      <TableCell className="px-6 py-5">
-                        <div className="flex gap-2 flex-wrap max-w-[250px]">
-                          {pupil.subjects.map(subject => (
-                            <Badge 
-                              key={subject} 
-                              variant="outline" 
-                              className="bg-blue-50 text-blue-700 border-blue-600/30 font-black text-[10px] uppercase px-2.5 py-1 shadow-sm hover:bg-blue-100 transition-colors"
-                            >
-                              {subject}
-                            </Badge>
+                      </div>
+                    </CardHeader>
+                    <CardContent className="p-0">
+                      <Table>
+                        <TableHeader>
+                          <TableRow className="bg-muted/50 border-b border-border/20">
+                            <TableHead className="px-6 py-4 font-black uppercase text-[10px] tracking-widest">Pupil</TableHead>
+                            <TableHead className="px-6 py-4 font-black uppercase text-[10px] tracking-widest">Pupil ID</TableHead>
+                            <TableHead className="px-6 py-4 font-black uppercase text-[10px] tracking-widest">Class</TableHead>
+                            <TableHead className="px-6 py-4 font-black uppercase text-[10px] tracking-widest text-center">Age</TableHead>
+                            <TableHead className="px-6 py-4 font-black uppercase text-[10px] tracking-widest">Subjects</TableHead>
+                            <TableHead className="px-6 py-4 font-black uppercase text-[10px] tracking-widest">Status</TableHead>
+                            <TableHead className="w-12"></TableHead>
+                          </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                          {filteredPupils.length === 0 ? (
+                            <TableRow>
+                              <TableCell colSpan={7} className="text-center py-10 bg-muted/5">
+                                <p className="font-black uppercase tracking-widest text-[10px] text-muted-foreground">No {displaySection} records found</p>
+                              </TableCell>
+                            </TableRow>
+                          ) : filteredPupils.map((pupil) => (
+                            <TableRow key={pupil.id} className="hover:bg-primary/[0.02] transition-colors border-b border-border/10 last:border-0">
+                              <TableCell className="px-6 py-5">
+                                <div className="flex items-center gap-3">
+                                  <Avatar className="h-10 w-10 border-2 border-primary/10 transition-transform hover:scale-110 shadow-lg shadow-black/5">
+                                    <AvatarFallback className="bg-primary/10 text-primary font-black">
+                                      {pupil.name.split(' ').map(n => n[0]).join('')}
+                                    </AvatarFallback>
+                                  </Avatar>
+                                  <div>
+                                    <p className="font-bold text-sm tracking-tight">{pupil.name}</p>
+                                    <p className="text-[10px] text-muted-foreground font-black uppercase tracking-wider">{pupil.email}</p>
+                                  </div>
+                                </div>
+                              </TableCell>
+                              <TableCell className="px-6 py-5 font-mono text-xs">
+                                <Badge variant="outline" className="border-border/30 px-3 py-1 font-mono text-[10px] tracking-tighter">{pupil.pupil_id}</Badge>
+                              </TableCell>
+                              <TableCell className="px-6 py-5 font-black text-xs uppercase tracking-tighter text-primary/80">{pupil.class}</TableCell>
+                              <TableCell className="px-6 py-5 text-center">
+                                <Badge variant="secondary" className="bg-muted/50 text-[10px] font-black uppercase tracking-widest px-3">{pupil.age} yrs</Badge>
+                              </TableCell>
+                              <TableCell className="px-6 py-5">
+                                <div className="flex gap-2 flex-wrap max-w-[250px]">
+                                  {pupil.subjects.map(subject => (
+                                    <Badge 
+                                      key={subject} 
+                                      variant="outline" 
+                                      className="bg-blue-50 text-blue-700 border-blue-600/30 font-black text-[10px] uppercase px-2.5 py-1 shadow-sm hover:bg-blue-100 transition-colors"
+                                    >
+                                      {subject}
+                                    </Badge>
+                                  ))}
+                                </div>
+                              </TableCell>
+                              <TableCell className="px-6 py-5">{getStatusBadge(pupil.status)}</TableCell>
+                              <TableCell className="px-6 py-5">
+                                {isAdmin && (
+                                  <DropdownMenu>
+                                    <DropdownMenuTrigger asChild>
+                                      <Button variant="ghost" size="icon" className="h-9 w-9 rounded-xl hover:bg-primary/10 transition-all">
+                                        <MoreHorizontal className="w-4 h-4" />
+                                      </Button>
+                                    </DropdownMenuTrigger>
+                                    <DropdownMenuContent align="end" className="bg-popover border-border/40 shadow-2xl rounded-2xl p-2 animate-in slide-in-from-top-1">
+                                      <DropdownMenuItem className="rounded-xl px-4 py-2.5 text-xs font-black uppercase tracking-widest transition-colors" onClick={() => setEditPupil(pupil)}>Edit Record</DropdownMenuItem>
+                                      <DropdownMenuItem className="text-destructive rounded-xl px-4 py-2.5 text-xs font-black uppercase tracking-widest transition-colors" onClick={() => setDeleteTarget(pupil)}>Expel/Remove</DropdownMenuItem>
+                                    </DropdownMenuContent>
+                                  </DropdownMenu>
+                                )}
+                              </TableCell>
+                            </TableRow>
                           ))}
-                        </div>
-                      </TableCell>
-                      <TableCell className="px-6 py-5">{getStatusBadge(pupil.status)}</TableCell>
-                      <TableCell className="px-6 py-5">
-                        {isAdmin && (
-                          <DropdownMenu>
-                            <DropdownMenuTrigger asChild><Button variant="ghost" size="icon" className="h-9 w-9 rounded-xl hover:bg-primary/10 transition-all"><MoreHorizontal className="w-4 h-4" /></Button></DropdownMenuTrigger>
-                            <DropdownMenuContent align="end" className="bg-popover border-border/40 shadow-2xl rounded-2xl p-2 animate-in slide-in-from-top-1">
-                              <DropdownMenuItem className="rounded-xl px-4 py-2.5 text-xs font-black uppercase tracking-widest transition-colors" onClick={() => setEditPupil(pupil)}>Edit Record</DropdownMenuItem>
-                              <DropdownMenuItem className="text-destructive rounded-xl px-4 py-2.5 text-xs font-black uppercase tracking-widest transition-colors" onClick={() => setDeleteTarget(pupil)}>Expel/Remove</DropdownMenuItem>
-                            </DropdownMenuContent>
-                          </DropdownMenu>
-                        )}
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </CardContent>
-          </Card>
+                        </TableBody>
+                      </Table>
+                    </CardContent>
+                  </Card>
+                </TabsContent>
+              );
+            })}
+          </Tabs>
         </TabsContent>
 
         {isAdmin && (
@@ -199,7 +262,7 @@ const Pupils = () => {
                 </CardDescription>
               </CardHeader>
               <CardContent className="p-12">
-                <AddPupilForm />
+                <AddPupilForm onSuccess={() => toast({ title: "Success", description: "Pupil added successfully." })} />
               </CardContent>
             </Card>
           </TabsContent>

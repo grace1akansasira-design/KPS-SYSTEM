@@ -103,7 +103,7 @@ const Rooms = () => {
   }
 
   return (
-    <DashboardLayout title="Classes Dashboard">
+    <DashboardLayout title="Classes Dashboard" description="Manages all physical learning spaces — classrooms, labs, and halls — including capacity, facilities, and availability status.">
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
         <Card className="border-border/40 bg-card/60 backdrop-blur-md shadow-xl"><CardContent className="p-4 flex items-center gap-4"><div className="p-3 rounded-xl bg-primary/10 shadow-inner"><Building2 className="w-6 h-6 text-primary" /></div><div><p className="text-2xl font-black tracking-tight">{rooms.length}</p><p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Total Classes</p></div></CardContent></Card>

@@ -116,7 +116,7 @@ const Subjects = () => {
   }
 
   return (
-    <DashboardLayout title="Subjects Dashboard">
+    <DashboardLayout title="Subjects Dashboard" description="Manages the school's academic curriculum — subject codes, assigned teachers, class levels, weekly periods, and term structure.">
 
       {/* Stat Cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">

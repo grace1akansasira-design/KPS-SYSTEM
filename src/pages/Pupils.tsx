@@ -85,7 +85,7 @@ const Pupils = () => {
   }
 
   return (
-    <DashboardLayout title="Pupils Dashboard">
+    <DashboardLayout title="Pupils Dashboard" description="Manages all enrolled pupils — their records, class sections (Primary & Nursery), age, subjects, and admission status.">
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
         <Card className="border-border/40 bg-card/60 backdrop-blur-md shadow-xl">

@@ -112,7 +112,7 @@ const Timetable = () => {
   }
 
   return (
-    <DashboardLayout title="Timetable Dashboard">
+    <DashboardLayout title="Timetable Dashboard" description="Displays the full school timetable — view, print, or download weekly class schedules for Primary and Nursery sections.">
 
       <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
         <DialogContent className="max-w-2xl bg-card border-none shadow-2xl rounded-3xl backdrop-blur-xl">

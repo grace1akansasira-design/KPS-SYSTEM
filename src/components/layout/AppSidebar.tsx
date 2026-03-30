@@ -85,7 +85,7 @@ export function AppSidebar() {
           </div>
           {!isCollapsed && (
             <div className="flex flex-col min-w-0">
-              <span className="sidebar-header-title">KPS</span>
+              <span className="sidebar-header-title">KPS TIMETABLE</span>
               <span className="sidebar-header-subtitle">MANAGEMENT SYSTEM</span>
             </div>
           )}

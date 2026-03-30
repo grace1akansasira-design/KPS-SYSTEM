@@ -77,7 +77,7 @@ const Notifications = () => {
   const unreadCount = notifications.filter((n) => !n.read).length;
 
   return (
-    <DashboardLayout title="Notifications">
+    <DashboardLayout title="Notifications" description="Manages system alerts and messages — timetable updates, class changes, reminders, and school-wide announcements.">
       <div className="space-y-10">
         
         {/* Actions Bar */}

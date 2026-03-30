@@ -186,7 +186,7 @@ const Settings = () => {
   };
 
   return (
-    <DashboardLayout title="Settings Dashboard">
+    <DashboardLayout title="Settings Dashboard" description="Manages your account preferences — profile details, notification settings, appearance options, and security controls.">
       <div className="space-y-10">
 
         <Tabs defaultValue="profile" className="space-y-6">

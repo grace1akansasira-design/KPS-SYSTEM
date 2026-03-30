@@ -120,7 +120,7 @@ const Teachers = () => {
   }
 
   return (
-    <DashboardLayout title="Teachers Dashboard">
+    <DashboardLayout title="Teachers Dashboard" description="Manages all teaching staff — their profiles, class assignments, subjects, and employment status.">
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
         <Card><CardContent className="p-4 flex items-center gap-4"><div className="p-3 rounded-xl bg-primary/10"><Users className="w-6 h-6 text-primary" /></div><div><p className="text-2xl font-bold">{teachers.length}</p><p className="text-sm text-muted-foreground">Total Teachers</p></div></CardContent></Card>

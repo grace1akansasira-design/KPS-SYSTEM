@@ -1,7 +1,10 @@
 const { createClient } = require('@supabase/supabase-js');
 require('dotenv').config();
 
-const supabase = createClient(process.env.'https://jwrhdpqivxhrhenufjtz.supabase.co', process.env.'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp3cmhkcGl2eGhyaGVudWZqdHoiLCJyb2xlIjoiYW5vbiIsImlhdCI6MTc0MTE5NzE1MiwiZXhwIjoyMDU2NzczMTUyfQ.q0_Y8z4P9_7_7_7_7_7_7_7_7_7_7_7_7_7_7_7_7_7_7_7_7_7_7_7_7_7_7_7_7_7_7_7');
+const supabase = createClient(
+  'https://jwrhdpqivxhrhenufjtz.supabase.co',
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp3cmhkcGl2eGhyaGVudWZqdHoiLCJyb2xlIjoiYW5vbiIsImlhdCI6MTc0MTE5NzE1MiwiZXhwIjoyMDU2NzczMTUyfQ.q0_Y8z4P9_7_7_7_7_7_7_7_7_7_7_7_7_7_7_7_7_7_7_7_7_7_7_7_7_7_7_7_7_7_7_7'
+);
 
 async function checkData() {
   console.log('Checking database table counts...');

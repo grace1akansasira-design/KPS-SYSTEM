@@ -106,7 +106,7 @@ const TimeSlots = () => {
   }
 
   return (
-    <DashboardLayout title="Schedule Management">
+    <DashboardLayout title="Schedule Management" description="Manages the daily timetable slots — lesson periods, teachers on duty, assigned rooms, and the full weekly academic schedule.">
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
         <Card className="border-border/40 bg-card/60 backdrop-blur-md shadow-xl"><CardContent className="p-4 flex items-center gap-4"><div className="p-3 rounded-xl bg-primary/10 shadow-inner"><Clock className="w-6 h-6 text-primary" /></div><div><p className="text-2xl font-black tracking-tight">{timeSlots.length}</p><p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Total Slots</p></div></CardContent></Card>
